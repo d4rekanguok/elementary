@@ -102,6 +102,11 @@ public:
         });
     }
 
+    void poke()
+    {
+        runtime->poke();
+    }
+
     void reset()
     {
         runtime->reset();
@@ -359,6 +364,7 @@ EMSCRIPTEN_BINDINGS(Elementary) {
         .function("getInputBufferData", &ElementaryAudioProcessor::getInputBufferData)
         .function("getOutputBufferData", &ElementaryAudioProcessor::getOutputBufferData)
         .function("postMessageBatch", &ElementaryAudioProcessor::postMessageBatch)
+        .function("poke", &ElementaryAudioProcessor::poke)
         .function("reset", &ElementaryAudioProcessor::reset)
         .function("addSharedResource", &ElementaryAudioProcessor::addSharedResource)
         .function("pruneSharedResources", &ElementaryAudioProcessor::pruneSharedResources)

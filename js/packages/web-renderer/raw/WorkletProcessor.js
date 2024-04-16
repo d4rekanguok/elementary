@@ -106,6 +106,13 @@ class ElementaryAudioWorkletProcessor extends AudioWorkletProcessor {
             requestId,
             result: null,
           }]);
+        case 'poke':
+          this._native.poke();
+
+          return this.port.postMessage(['reply', {
+            requestId,
+            result: null,
+          }]);
         case 'reset':
           this._native.reset();
 

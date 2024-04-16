@@ -161,6 +161,10 @@ export default class WebAudioRenderer extends EventEmitter {
     return await this._sendWorkletRequest('listVirtualFileSystem', {});
   }
 
+  async poke() {
+    return await this._sendWorkletRequest('poke', {});
+  }
+
   async reset() {
     return await this._sendWorkletRequest('reset', {});
   }

@@ -132,6 +132,11 @@ export function rand(a?) {
   return createNode("rand", {}, []);
 }
 
+// Poke node
+export function poke(): NodeRepr_t {
+  return createNode("poke", {}, []);
+}
+
 // Metro node
 type MetroNodeProps = {
   key?: string,

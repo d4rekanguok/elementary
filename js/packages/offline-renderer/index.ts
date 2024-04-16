@@ -166,6 +166,10 @@ export default class OfflineRenderer extends EventEmitter {
     return this._native.listSharedResources();
   }
 
+  poke() {
+    this._native.poke();
+  }
+
   reset() {
     this._native.reset();
   }
