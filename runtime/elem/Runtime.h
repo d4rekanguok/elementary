@@ -57,6 +57,10 @@ namespace elem
             void* userData = nullptr);
 
         //==============================================================================
+        // Sets a flag on any existing poke node in the graph so that on the next block
+        // each such node will emit an impulse.
+        void poke();
+
         // Process queued events
         //
         // This raises events from the processing graph such as new data from analysis nodes
@@ -396,6 +400,19 @@ namespace elem
 
 
     //==============================================================================
+    template <typename FloatType>
+    void Runtime<FloatType>::poke()
+    {
+        if (rtRenderSeq)
+        {
+            rtRenderSeq->forEach([](std::shared_ptr<GraphNode<FloatType>> const& node) {
+                if (auto ptr = std::dynamic_pointer_cast<PokeNode<FloatType>>(node)) {
+                    ptr->poke();
+                }
+            });
+        }
+    }
+
     template <typename FloatType>
     void Runtime<FloatType>::processQueuedEvents(std::function<void(std::string const&, js::Value)>&& evtCallback)
     {

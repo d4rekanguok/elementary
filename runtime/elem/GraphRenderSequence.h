@@ -161,6 +161,17 @@ namespace elem
             });
         }
 
+        void forEach(std::function<void(std::shared_ptr<GraphNode<FloatType>> const&)> const& callback)
+        {
+            // We don't iterate our nodes if the root is inactive
+            if (rootPtr->getPropertyWithDefault("active", false))
+            {
+                for (auto& n : nodeList) {
+                    callback(n);
+                }
+            }
+        }
+
         void processQueuedEvents(std::function<void(std::string const&, js::Value)>& evtCallback)
         {
             // We don't process events if our root is inactive
@@ -231,6 +242,13 @@ namespace elem
         void push(RootRenderSequence<FloatType>&& sq)
         {
             subseqs.push_back(std::move(sq));
+        }
+
+        void forEach(std::function<void(std::shared_ptr<GraphNode<FloatType>> const&)> const& callback)
+        {
+            std::for_each(subseqs.begin(), subseqs.end(), [&](RootRenderSequence<FloatType>& sq) {
+                sq.forEach(callback);
+            });
         }
 
         void processQueuedEvents(std::function<void(std::string const&, js::Value)>&& evtCallback)

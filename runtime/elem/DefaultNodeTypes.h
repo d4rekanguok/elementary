@@ -13,6 +13,7 @@
 #include "builtins/Capture.h"
 #include "builtins/Math.h"
 #include "builtins/Oscillators.h"
+#include "builtins/Poke.h"
 #include "builtins/Noise.h"
 #include "builtins/Sample.h"
 #include "builtins/SampleSeq.h"
@@ -99,6 +100,7 @@ namespace elem
             callback("maxhold",         GenericNodeFactory<MaxHold<FloatType>>());
             callback("once",            GenericNodeFactory<OnceNode<FloatType>>());
             callback("rand",            GenericNodeFactory<UniformRandomNoiseNode<FloatType>>());
+            callback("poke",            GenericNodeFactory<PokeNode<FloatType>>());
 
             // Delay nodes
             callback("delay",           GenericNodeFactory<VariableDelayNode<FloatType>>());
